@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Histórico de pesquisa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Histórico de pesquisa</h1>
+    <div class="results-container">
+        <a href="/" class="btn-voltar">Voltar para Pesquisa</a>
+        <table class="product-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Link</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produto in produtos_salvos %}
+                    <tr>
+                        <td>{{ produto[1] }}</td> <!-- Nome do Produto -->
+                        <td>R$ {{ produto[2] }}</td> <!-- Preço do Produto -->
+                        <td><a href="{{ produto[3] }}" target="_blank">Ver Produto</a></td> <!-- Link do Produto -->
+                        <td>
+                            <form action="/remover_produto/{{ produto[0] }}" method="post">
+                                <button type="submit">Remover</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
